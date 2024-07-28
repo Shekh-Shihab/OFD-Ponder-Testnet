@@ -100,8 +100,10 @@ ponder.on("Equity:Delegation", async ({ event, context }) => {
     create: {
       owner: event.args.from,
       delegatedTo: event.args.to,
+      pureDelegatedFrom: event.args.from,
     },
     update: {
+      owner: event.args.from,
       delegatedTo: event.args.to,
     },
   });

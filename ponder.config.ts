@@ -1,4 +1,5 @@
 import { createConfig } from "@ponder/core";
+import "dotenv/config";
 import { http, parseAbiItem } from "viem";
 
 import { bscTestnet } from "viem/chains";
