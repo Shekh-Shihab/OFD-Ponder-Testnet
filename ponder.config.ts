@@ -16,7 +16,7 @@ const transport = rateLimit(
       ? process.env.PONDER_RPC_URL_1
       : chain.rpcUrls.default.http[0]
   ),
-  { requestsPerSecond: 10 }
+  { requestsPerSecond: 1 }
 );
 
 // console.log(transport);
@@ -37,18 +37,21 @@ export default createConfig({
       abi: OracleFreeDollar,
       address: "0x9c06B95640455ae3DEc830A0a05370d4Cd6fFef8",
       startBlock: 41987493,
+      maxBlockRange: 5000,
     },
     Equity: {
       network: "bscTestnet",
       abi: Equity,
       address: "0x47DeAd2B6150eCEbFD0D5fd2F884a02Ee3966886",
       startBlock: 41762708,
+      maxBlockRange: 5000,
     },
     MintingHub: {
       network: "bscTestnet",
       abi: MintingHub,
       address: "0xF92B19b4D4dF3C25F5a238034eF4A0B3c05556a6",
       startBlock: 41960602,
+      maxBlockRange: 5000,
     },
     Position: {
       network: "bscTestnet",
@@ -59,6 +62,7 @@ export default createConfig({
         parameter: "position",
       },
       startBlock: 41960602,
+      maxBlockRange: 5000,
     },
   },
 });
