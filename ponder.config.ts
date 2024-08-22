@@ -1,4 +1,4 @@
-import { createConfig } from "@ponder/core";
+import { createConfig, rateLimit } from "@ponder/core";
 import "dotenv/config";
 import { http, parseAbiItem } from "viem";
 
@@ -10,13 +10,16 @@ import { OracleFreeDollar } from "./abis/OracleFreeDollar";
 import { Position } from "./abis/Position";
 
 const chain = bscTestnet;
-const transport = http(
-  (chain.id as number) === 97
-    ? process.env.PONDER_RPC_URL_1
-    : chain.rpcUrls.default.http[0]
+const transport = rateLimit(
+  http(
+    (chain.id as number) === 97
+      ? process.env.PONDER_RPC_URL_1
+      : chain.rpcUrls.default.http[0]
+  ),
+  { requestsPerSecond: 10 }
 );
 
-console.log(transport);
+// console.log(transport);
 const openPositionEvent = parseAbiItem(
   "event PositionOpened(address indexed owner,address indexed position,address ofd,address collateral,uint256 price)"
 );
